@@ -1,0 +1,322 @@
+[
+{
+    "id": "A1",
+    "color": "black",
+    "class": "rook-w"
+},
+{
+    "id": "A2",
+    "color": "white",
+    "class": "pawn-w"
+},
+{
+    "id": "A3",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "A4",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "A5",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "A6",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "A7",
+    "color": "black",
+    "class": "pawn-b"
+},
+{
+    "id": "A8",
+    "color": "white",
+    "class": "rook-b"
+},
+{
+    "id": "B1",
+    "color": "white",
+    "class": "knight-w"
+},
+{
+    "id": "B2",
+    "color": "black",
+    "class": "pawn-w"
+},
+{
+    "id": "B3",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "B4",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "B5",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "B6",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "B7",
+    "color": "white",
+    "class": "pawn-b"
+},
+{
+    "id": "B8",
+    "color": "black",
+    "class": "knight-b"
+},
+{
+    "id": "C1",
+    "color": "black",
+    "class": "bishop-w"
+},
+{
+    "id": "C2",
+    "color": "white",
+    "class": "pawn-w"
+},
+{
+    "id": "C3",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "C4",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "C5",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "C6",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "C7",
+    "color": "black",
+    "class": "pawn-b"
+},
+{
+    "id": "C8",
+    "color": "white",
+    "class": "bishop-b"
+},
+{
+    "id": "D1",
+    "color": "white",
+    "class": "queen-w"
+},
+{
+    "id": "D2",
+    "color": "black",
+    "class": "pawn-w"
+},
+{
+    "id": "D3",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "D4",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "D5",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "D6",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "D7",
+    "color": "white",
+    "class": "pawn-b"
+},
+{
+    "id": "D8",
+    "color": "black",
+    "class": "queen-b"
+},
+{
+    "id": "E1",
+    "color": "black",
+    "class": "king-w"
+},
+{
+    "id": "E2",
+    "color": "white",
+    "class": "pawn-w"
+},
+{
+    "id": "E3",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "E4",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "E5",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "E6",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "E7",
+    "color": "black",
+    "class": "pawn-b"
+},
+{
+    "id": "E8",
+    "color": "white",
+    "class": "king-b"
+},
+{
+    "id": "F1",
+    "color": "white",
+    "class": "bishop-w"
+},
+{
+    "id": "F2",
+    "color": "black",
+    "class": "pawn-w"
+},
+{
+    "id": "F3",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "F4",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "F5",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "F6",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "F7",
+    "color": "white",
+    "class": "pawn-b"
+},
+{
+    "id": "F8",
+    "color": "black",
+    "class": "bishop-b"
+},
+{
+    "id": "G1",
+    "color": "black",
+    "class": "knight-w"
+},
+{
+    "id": "G2",
+    "color": "white",
+    "class": "pawn-w"
+},
+{
+    "id": "G3",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "G4",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "G5",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "G6",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "G7",
+    "color": "black",
+    "class": "pawn-b"
+},
+{
+    "id": "G8",
+    "color": "white",
+    "class": "knight-b"
+},
+{
+    "id": "H1",
+    "color": "white",
+    "class": "rook-w"
+},
+{
+    "id": "H2",
+    "color": "black",
+    "class": "pawn-w"
+},
+{
+    "id": "H3",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "H4",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "H5",
+    "color": "white",
+    "class": "empty"
+},
+{
+    "id": "H6",
+    "color": "black",
+    "class": "empty"
+},
+{
+    "id": "H7",
+    "color": "white",
+    "class": "pawn-b"
+},
+{
+    "id": "H8",
+    "color": "black",
+    "class": "rook-b"
+}
+]
