@@ -6,20 +6,20 @@
       <button>Begin Game</button>
     </div>
     <div class="board-body">
-        <div class="row" v-for="row in rows" v-bind:key="row" >
+      <div class="row" v-for="row in rows" v-bind:key="row">
         <space
-        v-for="space in getRow(row)"
-        v-bind:key="space.id"
-        :class="space.color"
-        :id="space.id"
-        :piece="space.class" />
-        </div>
+          v-for="space in getRow(row)"
+          v-bind:key="space.id"
+          :class="space.color"
+          :id="space.id"
+          :piece="space.class"
+        />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import json from '../assets/board-setup.json'
 import Space from '../components/Space.vue'
 
 export default {
@@ -29,18 +29,20 @@ export default {
   },
   data () {
     return {
-      spaces: null,
       rows: [0, 1, 2, 3, 4, 5, 6, 7]
     }
   },
-  created () {
-    this.spaces = json
+  created () {},
+  computed: {
+    board () {
+      return this.$store.state.board
+    }
   },
   methods: {
     getRow (num) {
       const numMap = [8, 7, 6, 5, 4, 3, 2, 1]
       num = numMap[num]
-      return this.spaces.filter(space => space.id.includes(num))
+      return this.board.filter(space => space.id.includes(num))
     }
   }
 }
@@ -48,7 +50,7 @@ export default {
 
 <style>
 .row {
-    display: flex;
+  display: flex;
 }
 .board-body {
   display: flex;
