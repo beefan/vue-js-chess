@@ -11,7 +11,7 @@ const store = new Vuex.Store({
   },
   getters: {
     //  vuex supports getter properties for various elements of state
-    getBoard: state => {
+    getBoard: (state) => {
       return state.board
     }
   },
