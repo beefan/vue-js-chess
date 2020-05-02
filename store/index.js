@@ -7,12 +7,21 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     //  variables here to maintain state of
-    board: boardSetup
+    board: boardSetup,
+    turn: 'white',
+    selected: null,
+    move: null
   },
   getters: {
     //  vuex supports getter properties for various elements of state
-    getBoard: (state) => {
+    getBoard: state => {
       return state.board
+    },
+    getSelected: state => {
+      return state.selected
+    },
+    getTurn: state => {
+      return state.turn
     }
   },
   mutations: {
@@ -23,6 +32,9 @@ const store = new Vuex.Store({
     //  increment (state) {
     //   state.count++
     // },
+    select (state, payload) {
+      this.state.selected = payload.piece
+    }
   },
   actions: {
     //  like mutations but async allowed

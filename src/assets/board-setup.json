@@ -2,12 +2,12 @@
 {
     "id": "A1",
     "color": "black",
-    "class": "rook-w"
+    "class": "rook-w1"
 },
 {
     "id": "A2",
     "color": "white",
-    "class": "pawn-w"
+    "class": "pawn-w1"
 },
 {
     "id": "A3",
@@ -32,22 +32,22 @@
 {
     "id": "A7",
     "color": "black",
-    "class": "pawn-b"
+    "class": "pawn-b2"
 },
 {
     "id": "A8",
     "color": "white",
-    "class": "rook-b"
+    "class": "rook-b2"
 },
 {
     "id": "B1",
     "color": "white",
-    "class": "knight-w"
+    "class": "knight-w1"
 },
 {
     "id": "B2",
     "color": "black",
-    "class": "pawn-w"
+    "class": "pawn-w2"
 },
 {
     "id": "B3",
@@ -72,22 +72,22 @@
 {
     "id": "B7",
     "color": "white",
-    "class": "pawn-b"
+    "class": "pawn-b3"
 },
 {
     "id": "B8",
     "color": "black",
-    "class": "knight-b"
+    "class": "knight-b1"
 },
 {
     "id": "C1",
     "color": "black",
-    "class": "bishop-w"
+    "class": "bishop-w1"
 },
 {
     "id": "C2",
     "color": "white",
-    "class": "pawn-w"
+    "class": "pawn-w3"
 },
 {
     "id": "C3",
@@ -112,12 +112,12 @@
 {
     "id": "C7",
     "color": "black",
-    "class": "pawn-b"
+    "class": "pawn-b4"
 },
 {
     "id": "C8",
     "color": "white",
-    "class": "bishop-b"
+    "class": "bishop-b2"
 },
 {
     "id": "D1",
@@ -127,7 +127,7 @@
 {
     "id": "D2",
     "color": "black",
-    "class": "pawn-w"
+    "class": "pawn-w4"
 },
 {
     "id": "D3",
@@ -152,7 +152,7 @@
 {
     "id": "D7",
     "color": "white",
-    "class": "pawn-b"
+    "class": "pawn-b5"
 },
 {
     "id": "D8",
@@ -167,7 +167,7 @@
 {
     "id": "E2",
     "color": "white",
-    "class": "pawn-w"
+    "class": "pawn-w5"
 },
 {
     "id": "E3",
@@ -192,7 +192,7 @@
 {
     "id": "E7",
     "color": "black",
-    "class": "pawn-b"
+    "class": "pawn-b6"
 },
 {
     "id": "E8",
@@ -202,12 +202,12 @@
 {
     "id": "F1",
     "color": "white",
-    "class": "bishop-w"
+    "class": "bishop-w2"
 },
 {
     "id": "F2",
     "color": "black",
-    "class": "pawn-w"
+    "class": "pawn-w6"
 },
 {
     "id": "F3",
@@ -232,22 +232,22 @@
 {
     "id": "F7",
     "color": "white",
-    "class": "pawn-b"
+    "class": "pawn-b7"
 },
 {
     "id": "F8",
     "color": "black",
-    "class": "bishop-b"
+    "class": "bishop-b1"
 },
 {
     "id": "G1",
     "color": "black",
-    "class": "knight-w"
+    "class": "knight-w2"
 },
 {
     "id": "G2",
     "color": "white",
-    "class": "pawn-w"
+    "class": "pawn-w7"
 },
 {
     "id": "G3",
@@ -272,22 +272,22 @@
 {
     "id": "G7",
     "color": "black",
-    "class": "pawn-b"
+    "class": "pawn-b8"
 },
 {
     "id": "G8",
     "color": "white",
-    "class": "knight-b"
+    "class": "knight-b2"
 },
 {
     "id": "H1",
     "color": "white",
-    "class": "rook-w"
+    "class": "rook-w2"
 },
 {
     "id": "H2",
     "color": "black",
-    "class": "pawn-w"
+    "class": "pawn-w8"
 },
 {
     "id": "H3",
@@ -312,11 +312,11 @@
 {
     "id": "H7",
     "color": "white",
-    "class": "pawn-b"
+    "class": "pawn-b1"
 },
 {
     "id": "H8",
     "color": "black",
-    "class": "rook-b"
+    "class": "rook-b1"
 }
 ]

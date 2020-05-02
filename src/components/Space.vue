@@ -14,18 +14,42 @@ export default {
     piece: String
   },
   data () {
-    return {
-      selected: false
-    }
+    return {}
   },
   computed: {
     pieceIconUrl () {
-      return require('../assets/pieces/' + this.piece + '.png')
+      const c = this.color === 'white' ? '-w' : '-b'
+      const icon = this.piece === 'empty' ? 'empty' : this.type + c
+      return require('../assets/pieces/' + icon + '.png')
+    },
+    type () {
+      if (this.piece === 'empty') { return }
+      return /\d/.test(this.piece) ? this.piece.substring(0, this.piece.length - 3) : this.piece.substring(0, this.piece.length - 2)
+    },
+    turn () {
+      return this.$store.state.turn
+    },
+    selected () {
+      return this.$store.state.selected === this.piece
+    },
+    color () {
+      const color = /\d/.test(this.piece) ? this.piece.substring(this.piece.length - 2, this.piece.length - 1) : this.piece.substring(this.piece.length - 1)
+      return color === 'w' ? 'white' : 'black'
     }
   },
   methods: {
     spaceClick () {
-      this.selected = !this.selected
+      if (this.turn === this.color && this.type !== 'empty') {
+        // if this piece is selected, unselected it
+        if (this.selected) {
+          this.$store.commit('select', { piece: null })
+        } else {
+          this.$store.commit('select', { piece: this.piece })
+        }
+      }
+      if (this.turn === this.color && this.type === 'empty' && this.selected != null) {
+        // handle space selected to move
+      }
     }
   }
 }
