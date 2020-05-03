@@ -5,11 +5,22 @@ const pawnStarts = {
   white: cols.map(x => x + 2)
 }
 
+/**
+ *
+ * @param {*} piece
+ * @param {*} to
+ * @param {*} state
+ */
 export function canMove (piece, to, state) {
   const validMoves = getValidMoves(piece, state)
   return validMoves.includes(to)
 }
 
+/**
+ *
+ * @param {*} piece
+ * @param {*} state
+ */
 function getValidMoves (piece, state) {
   switch (piece) {
     case 'pawn':
@@ -29,6 +40,10 @@ function getValidMoves (piece, state) {
   }
 }
 
+/**
+ *
+ * @param {*} state
+ */
 function getPawnMoves (state) {
   console.log('can pawn move?')
   const letter = state.selected.substring(0, 1)
@@ -70,7 +85,11 @@ function getPawnMoves (state) {
   // TODO do any of these valid moves open up the king?
   return validMoves
 }
-export function getRookMoves (state) {
+/**
+ *
+ * @param {*} state
+ */
+function getRookMoves (state) {
   console.log('can rook move?')
   const letter = state.selected.substring(0, 1)
   const number = Number(state.selected.substring(1))
@@ -133,23 +152,105 @@ export function getRookMoves (state) {
   console.log(validMoves)
   return validMoves
 }
-export function getKnightMoves (state) {
+/**
+ *
+ * @param {*} state
+ */
+function getKnightMoves (state) {
   console.log('can knight move?')
-  return true
+  const validMoves = []
+  const letterIndex = cols.indexOf(state.selected.substring(0, 1))
+  const number = Number(state.selected.substring(1))
+
+  const upOne = number + 1 <= 8
+  const downOne = number - 1 > 0
+  const upTwo = number + 2 <= 8
+  const downTwo = number - 2 > 0
+  const rightOne = letterIndex + 1 < 8
+  const leftOne = letterIndex - 1 >= 0
+  const rightTwo = letterIndex + 2 < 8
+  const leftTwo = letterIndex - 2 >= 0
+
+  // up two, right one
+  if (upTwo && rightOne) {
+    validMoves.push(cols[letterIndex + 1] + (number + 2))
+  }
+  // up two, left one
+  if (upTwo && leftOne) {
+    validMoves.push(cols[letterIndex - 1] + (number + 2))
+  }
+  // down two, left one
+  if (downTwo && leftOne) {
+    validMoves.push(cols[letterIndex - 1] + (number - 2))
+  }
+  // down two, right one
+  if (downTwo && rightOne) {
+    validMoves.push(cols[letterIndex + 1] + (number - 2))
+  }
+  // up one, right two
+  if (upOne && rightTwo) {
+    validMoves.push(cols[letterIndex + 2] + (number + 1))
+  }
+  // up one, left two
+  if (upOne && leftTwo) {
+    validMoves.push(cols[letterIndex - 2] + (number + 1))
+  }
+  // down one, right two
+  if (downOne && rightTwo) {
+    validMoves.push(cols[letterIndex + 2] + (number - 1))
+  }
+  // down one, left two
+  if (downOne && leftTwo) {
+    validMoves.push(cols[letterIndex - 2] + (number - 1))
+  }
+
+  // remove spots with pieces of the same color
+  for (let i = 0; i < validMoves.length; i++) {
+    console.log(validMoves[i])
+    if (getTurnColor(state) === getPieceColor(state, validMoves[i])) {
+      console.log('invalid ' + validMoves[i])
+      validMoves[i] = 0
+    }
+  }
+
+  console.log('valid knight moves')
+  console.log(validMoves)
+  return validMoves
 }
-export function getBishopMoves (state) {
+/**
+ *
+ * @param {*} state
+ */
+function getBishopMoves (state) {
   console.log('can bishop move?')
-  return true
+  const validMoves = []
+  return validMoves
 }
-export function getQueenMoves (state) {
+/**
+ *
+ * @param {*} state
+ */
+function getQueenMoves (state) {
   console.log('can queen move?')
-  return true
+  const validMoves = []
+  return validMoves
 }
-export function getKingMoves (state) {
+/**
+ *
+ * @param {*} state
+ */
+function getKingMoves (state) {
   console.log('can king move?')
-  return true
+  const validMoves = []
+  return validMoves
 }
 
+/************************
+ * **********************
+ * **** Helper funcs. ***
+ * **********************
+ * **********************
+ */
 function isSpaceEmpty (state, space) {
   return state.board.filter(x => x.id === space)[0].occupant === 'empty'
 }
@@ -158,10 +259,10 @@ function getTurnColor (state) {
 }
 
 function getPieceColor (state, space) {
-  const pieceColor = state.board
-    .filter(x => x.id === space)[0]
-    .occupant.split('-')[1]
-    .substring(0, 1)
-  console.log(pieceColor)
-  return pieceColor
+  const piece = state.board.filter(x => x.id === space)[0].occupant
+  if (piece === 'empty') {
+    return 'empty'
+  }
+  const pieceColor = piece.split('-')[1].substring(0, 1)
+  return pieceColor === 'w' ? 'white' : 'black'
 }
