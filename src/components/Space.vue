@@ -60,10 +60,9 @@ export default {
         }
       }
       if (this.turn !== this.pieceColor && this.isSelected != null) {
-        console.log('move here')
-        // handle space selected to move
-        console.log(rules.canPieceMove(this.id))
-        this.$store.commit('move', { to: this.id })
+        if (rules.canPieceMove(this.id)) {
+          this.$store.commit('move', { to: this.id })
+        }
       }
     }
   }
