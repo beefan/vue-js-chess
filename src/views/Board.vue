@@ -2,7 +2,7 @@
   <div class="board">
     <div class="board-head">
       <p></p>
-      <button @click="resetBoard"> Reset Game </button>
+      <a href="/"><button> Reset Game </button></a>
     </div>
     <div class="board-body">
       <div class="row" v-for="row in rows" v-bind:key="row">
@@ -42,10 +42,6 @@ export default {
       const numMap = [8, 7, 6, 5, 4, 3, 2, 1]
       num = numMap[num]
       return this.board.filter(space => space.id.includes(num))
-    },
-    resetBoard () {
-      console.log('refresh called to')
-      this.$store.commit('refresh')
     }
   }
 }

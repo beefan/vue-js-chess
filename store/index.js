@@ -1,16 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import boardSetup from '../src/assets/board-setup.json'
+import theBoard from '../src/assets/board-setup.json'
 
 Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
     //  variables here to maintain state of
-    board: boardSetup,
-    turn: 'white',
-    selected: null,
-    move: null
+    board: theBoard,
+    turn: true,
+    selected: null
   },
   getters: {
     //  vuex supports getter properties for various elements of state
@@ -35,11 +34,8 @@ const store = new Vuex.Store({
     select (state, payload) {
       state.selected = payload.piece
     },
-    refresh (state) {
-      state.turn = 'white'
-      state.selected = null
-      state.move = null
-      state.board = boardSetup
+    move (state, payload) {
+      movePiece(payload.to, state)
     }
   },
   actions: {
@@ -48,5 +44,29 @@ const store = new Vuex.Store({
     //  this.$store.dispatch('xxx') in child components
   }
 })
+
+function movePiece (to, state) {
+  let piece
+  if (!state.selected) {
+    return
+  }
+  for (const space of state.board) {
+    if (space.id === state.selected) {
+      piece = space.occupant
+      space.occupant = 'empty'
+      break
+    }
+  }
+  for (const space of state.board) {
+    if (space.id === to) {
+      space.occupant = piece
+      break
+    }
+  }
+
+  state.turn = !state.turn
+  state.selected = null
+  console.log('moving ' + piece + ' to ' + to + ' from ' + state.selected)
+}
 
 export default store

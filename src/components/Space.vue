@@ -9,6 +9,7 @@
 </template>
 
 <script>
+const rules = require('../js/rules.js')
 export default {
   name: 'space',
   props: {
@@ -31,37 +32,38 @@ export default {
       return require('../assets/pieces/' + icon + '.png')
     },
     type () {
-      if (this.piece === 'empty') { return }
+      if (this.piece === 'empty') { return 'empty' }
       return /\d/.test(this.piece) ? this.piece.substring(0, this.piece.length - 3) : this.piece.substring(0, this.piece.length - 2)
     },
     turn () {
-      return this.$store.state.turn
+      return this.$store.state.turn ? 'white' : 'black'
     },
     isSelected () {
-      return this.$store.state.selected === this.piece
+      return this.$store.state.selected === this.id
     },
     pieceColor () {
+      if (this.piece === 'empty') { return 'empty' }
       const color = /\d/.test(this.piece) ? this.piece.substring(this.piece.length - 2, this.piece.length - 1) : this.piece.substring(this.piece.length - 1)
       return color === 'w' ? 'white' : 'black'
     }
   },
   methods: {
     spaceClick (e) {
+      console.log('piece Color ' + this.pieceColor)
+      console.log('piece type ' + this.type)
       if (this.turn === this.pieceColor && this.type !== 'empty') {
         // if this piece is selected, unselected it
         if (this.isSelected) {
           this.$store.commit('select', { piece: null })
         } else {
-          this.$store.commit('select', { piece: this.piece })
+          this.$store.commit('select', { piece: this.id })
         }
       }
       if (this.turn !== this.pieceColor && this.isSelected != null) {
         console.log('move here')
         // handle space selected to move
-        e.target.classList.add('purple')
-        // canPieceMove(this.id, e.target.id, this.pieceColor, this.type, ) ?
-        // canPieceMove(to, from, pieceColor, pieceType)
-        // movePiece(to, from, pieceColor, pieceType))
+        console.log(rules.canPieceMove(this.id))
+        this.$store.commit('move', { to: this.id })
       }
     }
   }
@@ -79,10 +81,5 @@ export default {
 .selected {
   box-shadow: 2px 2px 5px rgb(54, 247, 96) inset,
     -2px -2px 5px rgb(54, 247, 96) inset
-}
-
-.purple {
-    box-shadow: 2px 2px 5px rgb(170, 54, 247) inset,
-    -2px -2px 5px rgb(208, 54, 247) inset
 }
 </style>
