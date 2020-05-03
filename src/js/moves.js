@@ -5,7 +5,31 @@ const pawnStarts = {
   white: cols.map(x => x + 2)
 }
 
-export function canPawnMove (to, state) {
+export function canMove (piece, to, state) {
+  const validMoves = getValidMoves(piece, state)
+  return validMoves.includes(to)
+}
+
+function getValidMoves (piece, state) {
+  switch (piece) {
+    case 'pawn':
+      return getPawnMoves(state)
+    case 'rook':
+      return getRookMoves(state)
+    case 'knight':
+      return getKnightMoves(state)
+    case 'bishop':
+      return getBishopMoves(state)
+    case 'queen':
+      return getQueenMoves(state)
+    case 'king':
+      return getKingMoves(state)
+    default:
+      return []
+  }
+}
+
+function getPawnMoves (state) {
   console.log('can pawn move?')
   const turnColor = state.turn ? 'white' : 'black'
   const letter = state.selected.substring(0, 1)
@@ -43,25 +67,25 @@ export function canPawnMove (to, state) {
     }
   }
 
-  return validMoves.includes(to)
+  return validMoves
 }
-export function canRookMove (to, state) {
+export function getRookMoves (state) {
   console.log('can rook move?')
   return true
 }
-export function canKnightMove (to, state) {
+export function getKnightMoves (state) {
   console.log('can knight move?')
   return true
 }
-export function canBishopMove (to, state) {
+export function getBishopMoves (state) {
   console.log('can bishop move?')
   return true
 }
-export function canQueenMove (to, state) {
+export function getQueenMoves (state) {
   console.log('can queen move?')
   return true
 }
-export function canKingMove (to, state) {
+export function getKingMoves (state) {
   console.log('can king move?')
   return true
 }
