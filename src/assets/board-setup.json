@@ -2,321 +2,321 @@
 {
     "id": "A1",
     "color": "black",
-    "class": "rook-w1"
+    "occupant": "rook-w1"
 },
 {
     "id": "A2",
     "color": "white",
-    "class": "pawn-w1"
+    "occupant": "pawn-w1"
 },
 {
     "id": "A3",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "A4",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "A5",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "A6",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "A7",
     "color": "black",
-    "class": "pawn-b2"
+    "occupant": "pawn-b2"
 },
 {
     "id": "A8",
     "color": "white",
-    "class": "rook-b2"
+    "occupant": "rook-b2"
 },
 {
     "id": "B1",
     "color": "white",
-    "class": "knight-w1"
+    "occupant": "knight-w1"
 },
 {
     "id": "B2",
     "color": "black",
-    "class": "pawn-w2"
+    "occupant": "pawn-w2"
 },
 {
     "id": "B3",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "B4",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "B5",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "B6",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "B7",
     "color": "white",
-    "class": "pawn-b3"
+    "occupant": "pawn-b3"
 },
 {
     "id": "B8",
     "color": "black",
-    "class": "knight-b1"
+    "occupant": "knight-b1"
 },
 {
     "id": "C1",
     "color": "black",
-    "class": "bishop-w1"
+    "occupant": "bishop-w1"
 },
 {
     "id": "C2",
     "color": "white",
-    "class": "pawn-w3"
+    "occupant": "pawn-w3"
 },
 {
     "id": "C3",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "C4",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "C5",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "C6",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "C7",
     "color": "black",
-    "class": "pawn-b4"
+    "occupant": "pawn-b4"
 },
 {
     "id": "C8",
     "color": "white",
-    "class": "bishop-b2"
+    "occupant": "bishop-b2"
 },
 {
     "id": "D1",
     "color": "white",
-    "class": "queen-w"
+    "occupant": "queen-w"
 },
 {
     "id": "D2",
     "color": "black",
-    "class": "pawn-w4"
+    "occupant": "pawn-w4"
 },
 {
     "id": "D3",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "D4",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "D5",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "D6",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "D7",
     "color": "white",
-    "class": "pawn-b5"
+    "occupant": "pawn-b5"
 },
 {
     "id": "D8",
     "color": "black",
-    "class": "queen-b"
+    "occupant": "queen-b"
 },
 {
     "id": "E1",
     "color": "black",
-    "class": "king-w"
+    "occupant": "king-w"
 },
 {
     "id": "E2",
     "color": "white",
-    "class": "pawn-w5"
+    "occupant": "pawn-w5"
 },
 {
     "id": "E3",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "E4",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "E5",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "E6",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "E7",
     "color": "black",
-    "class": "pawn-b6"
+    "occupant": "pawn-b6"
 },
 {
     "id": "E8",
     "color": "white",
-    "class": "king-b"
+    "occupant": "king-b"
 },
 {
     "id": "F1",
     "color": "white",
-    "class": "bishop-w2"
+    "occupant": "bishop-w2"
 },
 {
     "id": "F2",
     "color": "black",
-    "class": "pawn-w6"
+    "occupant": "pawn-w6"
 },
 {
     "id": "F3",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "F4",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "F5",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "F6",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "F7",
     "color": "white",
-    "class": "pawn-b7"
+    "occupant": "pawn-b7"
 },
 {
     "id": "F8",
     "color": "black",
-    "class": "bishop-b1"
+    "occupant": "bishop-b1"
 },
 {
     "id": "G1",
     "color": "black",
-    "class": "knight-w2"
+    "occupant": "knight-w2"
 },
 {
     "id": "G2",
     "color": "white",
-    "class": "pawn-w7"
+    "occupant": "pawn-w7"
 },
 {
     "id": "G3",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "G4",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "G5",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "G6",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "G7",
     "color": "black",
-    "class": "pawn-b8"
+    "occupant": "pawn-b8"
 },
 {
     "id": "G8",
     "color": "white",
-    "class": "knight-b2"
+    "occupant": "knight-b2"
 },
 {
     "id": "H1",
     "color": "white",
-    "class": "rook-w2"
+    "occupant": "rook-w2"
 },
 {
     "id": "H2",
     "color": "black",
-    "class": "pawn-w8"
+    "occupant": "pawn-w8"
 },
 {
     "id": "H3",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "H4",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "H5",
     "color": "white",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "H6",
     "color": "black",
-    "class": "empty"
+    "occupant": "empty"
 },
 {
     "id": "H7",
     "color": "white",
-    "class": "pawn-b1"
+    "occupant": "pawn-b1"
 },
 {
     "id": "H8",
     "color": "black",
-    "class": "rook-b1"
+    "occupant": "rook-b1"
 }
 ]

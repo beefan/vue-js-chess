@@ -33,7 +33,13 @@ const store = new Vuex.Store({
     //   state.count++
     // },
     select (state, payload) {
-      this.state.selected = payload.piece
+      state.selected = payload.piece
+    },
+    refresh (state) {
+      state.turn = 'white'
+      state.selected = null
+      state.move = null
+      state.board = boardSetup
     }
   },
   actions: {

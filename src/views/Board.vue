@@ -2,17 +2,16 @@
   <div class="board">
     <div class="board-head">
       <p></p>
-      <p>Ready?</p>
-      <button>Begin Game</button>
+      <button @click="resetBoard"> Reset Game </button>
     </div>
     <div class="board-body">
       <div class="row" v-for="row in rows" v-bind:key="row">
         <space
           v-for="space in getRow(row)"
           v-bind:key="space.id"
-          :class="space.color"
           :id="space.id"
-          :piece="space.class"
+          :color="space.color"
+          :piece="space.occupant"
         />
       </div>
     </div>
@@ -43,6 +42,10 @@ export default {
       const numMap = [8, 7, 6, 5, 4, 3, 2, 1]
       num = numMap[num]
       return this.board.filter(space => space.id.includes(num))
+    },
+    resetBoard () {
+      console.log('refresh called to')
+      this.$store.commit('refresh')
     }
   }
 }
