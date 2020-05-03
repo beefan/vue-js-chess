@@ -51,7 +51,7 @@ export default {
     spaceClick (e) {
       console.log('piece Color ' + this.pieceColor)
       console.log('piece type ' + this.type)
-      if (this.turn === this.pieceColor && this.type !== 'empty') {
+      if (this.turn === this.pieceColor) {
         // if this piece is selected, unselected it
         if (this.isSelected) {
           this.$store.commit('select', { piece: null })
@@ -71,8 +71,9 @@ export default {
 
 <style>
 .space {
-  width: 12.5%;
-  max-height: 60px;
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
 }
 .black {
   background-color: rgb(35, 75, 65)
