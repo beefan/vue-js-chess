@@ -94,8 +94,8 @@ export default {
     -2px -2px 5px rgb(105, 8, 117) inset
   }
   to {
-  box-shadow: 6px 6px 25px rgb(187, 48, 230) inset,
-    -6px -6px 25px rgb(105, 8, 117) inset
+  box-shadow: 6px 6px 10px rgb(187, 48, 230) inset,
+    -6px -6px 10px rgb(105, 8, 117) inset
   }
 }
 .move-here {
@@ -103,5 +103,6 @@ export default {
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
+    animation-direction: alternate;
 }
 </style>
