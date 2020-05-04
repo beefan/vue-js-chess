@@ -237,10 +237,6 @@ function getBishopMoves (state) {
   let right = true
   for (let i = number + 1; i <= 8; i++) {
     const diagnols = getDiagnols(letter, i - number)
-    console.log(diagnols)
-    console.log('left diag')
-    console.log(diagnols.left)
-    console.log(diagnols.left + i)
     if (left && diagnols.left !== null) {
       if (isSpaceEmpty(state, diagnols.left + i)) {
         validMoves.push(diagnols.left + i)
@@ -292,7 +288,9 @@ function getBishopMoves (state) {
  */
 function getQueenMoves (state) {
   console.log('can queen move?')
-  const validMoves = []
+  const validMoves = getRookMoves(state).concat(getBishopMoves(state))
+  console.log('valid queen moves')
+  console.log(validMoves)
   return validMoves
 }
 /**
