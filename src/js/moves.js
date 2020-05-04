@@ -8,20 +8,9 @@ const pawnStarts = {
 /**
  *
  * @param {*} piece
- * @param {*} to
  * @param {*} state
  */
-export function canMove (piece, to, state) {
-  const validMoves = getValidMoves(piece, state)
-  return validMoves.includes(to)
-}
-
-/**
- *
- * @param {*} piece
- * @param {*} state
- */
-function getValidMoves (piece, state) {
+export function getValidMoves (piece, state) {
   switch (piece) {
     case 'pawn':
       return getPawnMoves(state)

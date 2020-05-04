@@ -1,8 +1,8 @@
 import store from '../../store/index.js'
 const moves = require('./moves.js')
 
-export function canPieceMove (to) {
-  return moves.canMove(getPieceType(), to, store.state)
+export function getMoves () {
+  return moves.getValidMoves(getPieceType(), store.state)
 }
 
 function getPieceType () {

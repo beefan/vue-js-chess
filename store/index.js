@@ -4,12 +4,14 @@ import theBoard from '../src/assets/board-setup.json'
 
 Vue.use(Vuex)
 
+const rules = require('../src/js/rules.js')
 const store = new Vuex.Store({
   state: {
     //  variables here to maintain state of
     board: theBoard,
     turn: true,
-    selected: null
+    selected: null,
+    validMoves: []
   },
   getters: {
     //  vuex supports getter properties for various elements of state
@@ -21,6 +23,9 @@ const store = new Vuex.Store({
     },
     getTurn: state => {
       return state.turn
+    },
+    getMoves: state => {
+      return state.validMoves
     }
   },
   mutations: {
@@ -33,9 +38,15 @@ const store = new Vuex.Store({
     // },
     select (state, payload) {
       state.selected = payload.piece
+      if (payload.piece !== null) {
+        state.validMoves = rules.getMoves()
+      } else {
+        state.validMoves = []
+      }
     },
     move (state, payload) {
       movePiece(payload.to, state)
+      state.validMoves = []
     }
   },
   actions: {

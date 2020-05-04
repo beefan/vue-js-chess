@@ -9,7 +9,6 @@
 </template>
 
 <script>
-const rules = require('../js/rules.js')
 export default {
   name: 'space',
   props: {
@@ -24,7 +23,8 @@ export default {
   computed: {
     thisClass () {
       const select = this.isSelected ? 'space selected' : 'space'
-      return this.color + ' ' + select
+      const move = this.isMove ? ' move-here' : ''
+      return this.color + ' ' + select + move
     },
     pieceIconUrl () {
       const c = this.pieceColor === 'white' ? '-w' : '-b'
@@ -41,10 +41,16 @@ export default {
     isSelected () {
       return this.$store.state.selected === this.id
     },
+    isMove () {
+      return this.validMoves.includes(this.id)
+    },
     pieceColor () {
       if (this.piece === 'empty') { return 'empty' }
       const color = /\d/.test(this.piece) ? this.piece.substring(this.piece.length - 2, this.piece.length - 1) : this.piece.substring(this.piece.length - 1)
       return color === 'w' ? 'white' : 'black'
+    },
+    validMoves () {
+      return this.$store.state.validMoves
     }
   },
   methods: {
@@ -60,7 +66,7 @@ export default {
         }
       }
       if (this.turn !== this.pieceColor && this.isSelected != null) {
-        if (rules.canPieceMove(this.id)) {
+        if (this.isMove) {
           this.$store.commit('move', { to: this.id })
         }
       }
@@ -81,5 +87,21 @@ export default {
 .selected {
   box-shadow: 2px 2px 5px rgb(54, 247, 96) inset,
     -2px -2px 5px rgb(54, 247, 96) inset
+}
+@keyframes valid {
+  from {
+  box-shadow: 2px 2px 5px rgb(187, 48, 230) inset,
+    -2px -2px 5px rgb(105, 8, 117) inset
+  }
+  to {
+  box-shadow: 6px 6px 25px rgb(187, 48, 230) inset,
+    -6px -6px 25px rgb(105, 8, 117) inset
+  }
+}
+.move-here {
+    animation-name: valid;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
 </style>
