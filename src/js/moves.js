@@ -48,12 +48,7 @@ function getPawnMoves (state) {
   console.log('can pawn move?')
   const letter = state.selected.substring(0, 1)
   const number = Number(state.selected.substring(1))
-  const diagnols = cols.filter((col, index) => {
-    return (
-      (index + 1 < cols.length && cols[index + 1] === letter) ||
-      (index - 1 > -1 && cols[index - 1] === letter)
-    )
-  })
+  const diagnols = getDiagnols(letter, 1)
   const validMoves = []
   let moves = 1
 
@@ -74,8 +69,19 @@ function getPawnMoves (state) {
   }
 
   // the pawn can take diagnol pieces
-  for (const letter of diagnols) {
-    const space = state.turn ? letter + (number + 1) : letter + (number - 1)
+  //   for (const letter of diagnols) {
+  //     const space = state.turn ? letter + (number + 1) : letter + (number - 1)
+  //     if (!isSpaceEmpty(state, space)) {
+  //       validMoves.push(space)
+  //     }
+  //   }
+  for (const prop in diagnols) {
+    if (diagnols[prop] === null) {
+      continue
+    }
+    const space = state.turn
+      ? diagnols[prop] + (number + 1)
+      : diagnols[prop] + (number - 1)
     if (!isSpaceEmpty(state, space)) {
       validMoves.push(space)
     }
@@ -222,7 +228,62 @@ function getKnightMoves (state) {
  */
 function getBishopMoves (state) {
   console.log('can bishop move?')
+  const letter = state.selected.substring(0, 1)
+  const number = Number(state.selected.substring(1))
   const validMoves = []
+
+  // number increasing to 8
+  let left = true
+  let right = true
+  for (let i = number + 1; i <= 8; i++) {
+    const diagnols = getDiagnols(letter, i - number)
+    console.log(diagnols)
+    console.log('left diag')
+    console.log(diagnols.left)
+    console.log(diagnols.left + i)
+    if (left && diagnols.left !== null) {
+      if (isSpaceEmpty(state, diagnols.left + i)) {
+        validMoves.push(diagnols.left + i)
+      } else {
+        left = false
+      }
+    }
+    if (right && diagnols.right !== null) {
+      if (isSpaceEmpty(state, diagnols.right + i)) {
+        validMoves.push(diagnols.right + i)
+      } else {
+        right = false
+      }
+    }
+  }
+  // number decreasing to 0
+  left = true
+  right = true
+  for (let i = number - 1; i > 0; i--) {
+    const diagnols = getDiagnols(letter, number - i)
+    if (left && diagnols.left !== null) {
+      if (
+        isSpaceEmpty(state, diagnols.left + i) &&
+        !isFriendlyFire(state, diagnols.left + i)
+      ) {
+        validMoves.push(diagnols.left + i)
+      } else {
+        left = false
+      }
+    }
+    if (right && diagnols.right !== null) {
+      if (
+        isSpaceEmpty(state, diagnols.right + i) &&
+        !isFriendlyFire(state, diagnols.right + i)
+      ) {
+        validMoves.push(diagnols.right + i)
+      } else {
+        right = false
+      }
+    }
+  }
+  console.log('bishop valid moves')
+  console.log(validMoves)
   return validMoves
 }
 /**
@@ -251,7 +312,8 @@ function getKingMoves (state) {
  * **********************
  */
 function isSpaceEmpty (state, space) {
-  return state.board.filter(x => x.id === space)[0].occupant === 'empty'
+  const place = state.board.filter(x => x.id === space)[0]
+  return place.occupant === 'empty'
 }
 function getTurnColor (state) {
   return state.turn ? 'white' : 'black'
@@ -268,4 +330,13 @@ function getPieceColor (state, space) {
 
 function isFriendlyFire (state, space) {
   return getTurnColor(state) === getPieceColor(state, space)
+}
+
+function getDiagnols (letter, d) {
+  const index = cols.indexOf(letter)
+  console.log('letter index ' + index + 'd ' + d)
+  return {
+    right: index - d > -1 ? cols[index - d] : null,
+    left: index + d < cols.length ? cols[index + d] : null
+  }
 }
