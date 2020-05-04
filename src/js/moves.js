@@ -100,7 +100,7 @@ function getRookMoves (state) {
     const spaceId = letter + i
     if (isSpaceEmpty(state, spaceId)) {
       validMoves.push(spaceId)
-    } else if (getTurnColor(state) !== getPieceColor(state, spaceId)) {
+    } else if (!isFriendlyFire(state, spaceId)) {
       validMoves.push(spaceId)
       break
     } else {
@@ -112,7 +112,7 @@ function getRookMoves (state) {
     const spaceId = letter + i
     if (isSpaceEmpty(state, spaceId)) {
       validMoves.push(spaceId)
-    } else if (getTurnColor(state) !== getPieceColor(state, spaceId)) {
+    } else if (!isFriendlyFire(state, spaceId)) {
       validMoves.push(spaceId)
       break
     } else {
@@ -126,7 +126,7 @@ function getRookMoves (state) {
     console.log(spaceId)
     if (isSpaceEmpty(state, spaceId)) {
       validMoves.push(spaceId)
-    } else if (getTurnColor(state) !== getPieceColor(state, spaceId)) {
+    } else if (!isFriendlyFire(state, spaceId)) {
       validMoves.push(spaceId)
       break
     } else {
@@ -141,7 +141,7 @@ function getRookMoves (state) {
 
     if (isSpaceEmpty(state, spaceId)) {
       validMoves.push(spaceId)
-    } else if (getTurnColor(state) !== getPieceColor(state, spaceId)) {
+    } else if (!isFriendlyFire(state, spaceId)) {
       validMoves.push(spaceId)
       break
     } else {
@@ -172,45 +172,44 @@ function getKnightMoves (state) {
   const leftTwo = letterIndex - 2 >= 0
 
   // up two, right one
-  if (upTwo && rightOne) {
-    validMoves.push(cols[letterIndex + 1] + (number + 2))
+  let target = cols[letterIndex + 1] + (number + 2)
+  if (upTwo && rightOne && !isFriendlyFire(state, target)) {
+    validMoves.push(target)
   }
   // up two, left one
-  if (upTwo && leftOne) {
-    validMoves.push(cols[letterIndex - 1] + (number + 2))
+  target = cols[letterIndex - 1] + (number + 2)
+  if (upTwo && leftOne && !isFriendlyFire(state, target)) {
+    validMoves.push(target)
   }
   // down two, left one
-  if (downTwo && leftOne) {
-    validMoves.push(cols[letterIndex - 1] + (number - 2))
+  target = cols[letterIndex - 1] + (number - 2)
+  if (downTwo && leftOne && !isFriendlyFire(state, target)) {
+    validMoves.push(target)
   }
   // down two, right one
-  if (downTwo && rightOne) {
-    validMoves.push(cols[letterIndex + 1] + (number - 2))
+  target = cols[letterIndex + 1] + (number - 2)
+  if (downTwo && rightOne && !isFriendlyFire(state, target)) {
+    validMoves.push(target)
   }
   // up one, right two
-  if (upOne && rightTwo) {
-    validMoves.push(cols[letterIndex + 2] + (number + 1))
+  target = cols[letterIndex + 2] + (number + 1)
+  if (upOne && rightTwo && !isFriendlyFire(state, target)) {
+    validMoves.push(target)
   }
   // up one, left two
-  if (upOne && leftTwo) {
-    validMoves.push(cols[letterIndex - 2] + (number + 1))
+  target = cols[letterIndex - 2] + (number + 1)
+  if (upOne && leftTwo && !isFriendlyFire(state, target)) {
+    validMoves.push(target)
   }
   // down one, right two
-  if (downOne && rightTwo) {
-    validMoves.push(cols[letterIndex + 2] + (number - 1))
+  target = cols[letterIndex + 2] + (number - 1)
+  if (downOne && rightTwo && !isFriendlyFire(state, target)) {
+    validMoves.push(target)
   }
   // down one, left two
-  if (downOne && leftTwo) {
-    validMoves.push(cols[letterIndex - 2] + (number - 1))
-  }
-
-  // remove spots with pieces of the same color
-  for (let i = 0; i < validMoves.length; i++) {
-    console.log(validMoves[i])
-    if (getTurnColor(state) === getPieceColor(state, validMoves[i])) {
-      console.log('invalid ' + validMoves[i])
-      validMoves[i] = 0
-    }
+  target = cols[letterIndex - 2] + (number - 1)
+  if (downOne && leftTwo && !isFriendlyFire(state, target)) {
+    validMoves.push(target)
   }
 
   console.log('valid knight moves')
@@ -265,4 +264,8 @@ function getPieceColor (state, space) {
   }
   const pieceColor = piece.split('-')[1].substring(0, 1)
   return pieceColor === 'w' ? 'white' : 'black'
+}
+
+function isFriendlyFire (state, space) {
+  return getTurnColor(state) === getPieceColor(state, space)
 }
