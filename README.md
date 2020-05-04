@@ -2,6 +2,9 @@
 
 Simple Chess Game implemented in Vue to help me learn it! 
 
+## screen shot
+![vue chess](./vue-chess-screen.png)
+
 ## Project setup
 ```
 npm install
