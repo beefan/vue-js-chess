@@ -299,7 +299,32 @@ function getQueenMoves (state) {
  */
 function getKingMoves (state) {
   console.log('can king move?')
+  const letter = state.selected.substring(0, 1)
+  const number = Number(state.selected.substring(1))
+  const diagnols = getDiagnols(letter, 1)
+  diagnols.center = letter
   const validMoves = []
+
+  for (const prop in diagnols) {
+    const ltr = diagnols[prop]
+    const targets = []
+    if (prop !== 'center') {
+      targets.push(ltr + number)
+    }
+    if (number + 1 <= 8) {
+      targets.push(ltr + (number + 1))
+    }
+    if (number - 1 >= 1) {
+      targets.push(ltr + (number - 1))
+    }
+    for (const target of targets) {
+      if (!isFriendlyFire(state, target)) {
+        validMoves.push(target)
+      }
+    }
+  }
+  console.log('valid king moves')
+  console.log(validMoves)
   return validMoves
 }
 
