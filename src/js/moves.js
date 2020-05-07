@@ -10,20 +10,20 @@ const pawnStarts = {
  * @param {*} piece
  * @param {*} state
  */
-export function getValidMoves (piece, state) {
+export function getValidMoves (piece, state, selected) {
   switch (piece) {
     case 'pawn':
-      return getPawnMoves(state)
+      return getPawnMoves(state, selected)
     case 'rook':
-      return getRookMoves(state)
+      return getRookMoves(state, selected)
     case 'knight':
-      return getKnightMoves(state)
+      return getKnightMoves(state, selected)
     case 'bishop':
-      return getBishopMoves(state)
+      return getBishopMoves(state, selected)
     case 'queen':
-      return getQueenMoves(state)
+      return getQueenMoves(state, selected)
     case 'king':
-      return getKingMoves(state)
+      return getKingMoves(state, selected)
     default:
       return []
   }
@@ -33,16 +33,16 @@ export function getValidMoves (piece, state) {
  *
  * @param {*} state
  */
-function getPawnMoves (state) {
+function getPawnMoves (state, selected) {
   console.log('can pawn move?')
-  const letter = state.selected.substring(0, 1)
-  const number = Number(state.selected.substring(1))
+  const letter = selected.substring(0, 1)
+  const number = Number(selected.substring(1))
   const diagnols = getDiagnols(letter, 1)
   const validMoves = []
   let moves = 1
 
   // if the pawn is in its original place, it can move two spaces
-  if (pawnStarts[getTurnColor(state)].includes(state.selected)) {
+  if (pawnStarts[getTurnColor(state)].includes(selected)) {
     moves = 2
   }
 
@@ -57,13 +57,6 @@ function getPawnMoves (state) {
     }
   }
 
-  // the pawn can take diagnol pieces
-  //   for (const letter of diagnols) {
-  //     const space = state.turn ? letter + (number + 1) : letter + (number - 1)
-  //     if (!isSpaceEmpty(state, space)) {
-  //       validMoves.push(space)
-  //     }
-  //   }
   for (const prop in diagnols) {
     if (diagnols[prop] === null) {
       continue
@@ -84,10 +77,10 @@ function getPawnMoves (state) {
  *
  * @param {*} state
  */
-function getRookMoves (state) {
+function getRookMoves (state, selected) {
   console.log('can rook move?')
-  const letter = state.selected.substring(0, 1)
-  const number = Number(state.selected.substring(1))
+  const letter = selected.substring(0, 1)
+  const number = Number(selected.substring(1))
   const validMoves = []
 
   // moves up
@@ -151,11 +144,11 @@ function getRookMoves (state) {
  *
  * @param {*} state
  */
-function getKnightMoves (state) {
+function getKnightMoves (state, selected) {
   console.log('can knight move?')
   const validMoves = []
-  const letterIndex = cols.indexOf(state.selected.substring(0, 1))
-  const number = Number(state.selected.substring(1))
+  const letterIndex = cols.indexOf(selected.substring(0, 1))
+  const number = Number(selected.substring(1))
 
   const upOne = number + 1 <= 8
   const downOne = number - 1 > 0
@@ -215,10 +208,10 @@ function getKnightMoves (state) {
  *
  * @param {*} state
  */
-function getBishopMoves (state) {
+function getBishopMoves (state, selected) {
   console.log('can bishop move?')
-  const letter = state.selected.substring(0, 1)
-  const number = Number(state.selected.substring(1))
+  const letter = selected.substring(0, 1)
+  const number = Number(selected.substring(1))
   const validMoves = []
 
   // number increasing to 8
@@ -275,9 +268,11 @@ function getBishopMoves (state) {
  *
  * @param {*} state
  */
-function getQueenMoves (state) {
+function getQueenMoves (state, selected) {
   console.log('can queen move?')
-  const validMoves = getRookMoves(state).concat(getBishopMoves(state))
+  const validMoves = getRookMoves(state, selected).concat(
+    getBishopMoves(state, selected)
+  )
   console.log('valid queen moves')
   console.log(validMoves)
   return validMoves
@@ -286,10 +281,10 @@ function getQueenMoves (state) {
  *
  * @param {*} state
  */
-function getKingMoves (state) {
+function getKingMoves (state, selected) {
   console.log('can king move?')
-  const letter = state.selected.substring(0, 1)
-  const number = Number(state.selected.substring(1))
+  const letter = selected.substring(0, 1)
+  const number = Number(selected.substring(1))
   const diagnols = getDiagnols(letter, 1)
   diagnols.center = letter
   const validMoves = []

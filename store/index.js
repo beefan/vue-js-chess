@@ -11,7 +11,8 @@ const store = new Vuex.Store({
     board: theBoard,
     turn: true,
     selected: null,
-    validMoves: []
+    validMoves: [],
+    check: false
   },
   getters: {
     //  vuex supports getter properties for various elements of state
@@ -26,6 +27,9 @@ const store = new Vuex.Store({
     },
     getMoves: state => {
       return state.validMoves
+    },
+    getCheck: state => {
+      return state.check
     }
   },
   mutations: {
@@ -48,6 +52,14 @@ const store = new Vuex.Store({
       movePiece(payload.to, state)
       state.validMoves = []
     }
+    // preMoveCheck (state, payload) {
+    //   state.turn = !state.turn
+    //   state.check = rules.inCheck(payload.to)
+    //   state.turn = !state.turn
+    // },
+    // postMoveCheck (state) {
+    //   state.check = rules.opponentInCheck()
+    // }
   },
   actions: {
     //  like mutations but async allowed
@@ -76,8 +88,8 @@ function movePiece (to, state) {
   }
 
   state.turn = !state.turn
-  state.selected = null
   console.log('moving ' + piece + ' to ' + to + ' from ' + state.selected)
+  state.selected = null
 }
 
 export default store

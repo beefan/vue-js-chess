@@ -51,6 +51,9 @@ export default {
     },
     validMoves () {
       return this.$store.state.validMoves
+    },
+    check () {
+      return this.$store.state.check
     }
   },
   methods: {
@@ -68,6 +71,17 @@ export default {
       if (this.turn !== this.pieceColor && this.isSelected != null) {
         if (this.isMove) {
           this.$store.commit('move', { to: this.id })
+          // console.log('got here')
+          // this.$store.commit('preMoveCheck', { to: this.id })
+          // if (this.check) {
+          //   alert('that move will put you in check')
+          // } else {
+          //   this.$store.commit('move', { to: this.id })
+          //   this.$store.commit('postMoveCheck')
+          //   if (this.check) {
+          //     alert(this.turn + ' is in check')
+          //   }
+          // }
         }
       }
     }
