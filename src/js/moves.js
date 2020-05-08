@@ -34,7 +34,6 @@ export function getValidMoves (piece, state, selected) {
  * @param {*} state
  */
 function getPawnMoves (state, selected) {
-  console.log('can pawn move?')
   const letter = selected.substring(0, 1)
   const number = Number(selected.substring(1))
   const diagnols = getDiagnols(letter, 1)
@@ -68,9 +67,6 @@ function getPawnMoves (state, selected) {
       validMoves.push(space)
     }
   }
-  console.log('valid pawn moves')
-  console.log(validMoves)
-  // TODO do any of these valid moves open up the king?
   return validMoves
 }
 /**
@@ -78,7 +74,6 @@ function getPawnMoves (state, selected) {
  * @param {*} state
  */
 function getRookMoves (state, selected) {
-  console.log('can rook move?')
   const letter = selected.substring(0, 1)
   const number = Number(selected.substring(1))
   const validMoves = []
@@ -110,8 +105,6 @@ function getRookMoves (state, selected) {
   // moves right
   for (let i = cols.indexOf(letter) + 1; i < cols.length; i++) {
     const spaceId = cols[i] + number
-    console.log(' to the right ')
-    console.log(spaceId)
     if (isSpaceEmpty(state, spaceId)) {
       validMoves.push(spaceId)
     } else if (!isFriendlyFire(state, spaceId)) {
@@ -124,8 +117,6 @@ function getRookMoves (state, selected) {
   // moves left
   for (let i = cols.indexOf(letter) - 1; i >= 0; i--) {
     const spaceId = cols[i] + number
-    console.log(' to the left ')
-    console.log(spaceId)
 
     if (isSpaceEmpty(state, spaceId)) {
       validMoves.push(spaceId)
@@ -136,8 +127,6 @@ function getRookMoves (state, selected) {
       break
     }
   }
-  console.log('valid rook moves')
-  console.log(validMoves)
   return validMoves
 }
 /**
@@ -145,7 +134,6 @@ function getRookMoves (state, selected) {
  * @param {*} state
  */
 function getKnightMoves (state, selected) {
-  console.log('can knight move?')
   const validMoves = []
   const letterIndex = cols.indexOf(selected.substring(0, 1))
   const number = Number(selected.substring(1))
@@ -199,9 +187,6 @@ function getKnightMoves (state, selected) {
   if (downOne && leftTwo && !isFriendlyFire(state, target)) {
     validMoves.push(target)
   }
-
-  console.log('valid knight moves')
-  console.log(validMoves)
   return validMoves
 }
 /**
@@ -209,7 +194,6 @@ function getKnightMoves (state, selected) {
  * @param {*} state
  */
 function getBishopMoves (state, selected) {
-  console.log('can bishop move?')
   const letter = selected.substring(0, 1)
   const number = Number(selected.substring(1))
   const validMoves = []
@@ -260,8 +244,6 @@ function getBishopMoves (state, selected) {
       }
     }
   }
-  console.log('bishop valid moves')
-  console.log(validMoves)
   return validMoves
 }
 /**
@@ -269,12 +251,9 @@ function getBishopMoves (state, selected) {
  * @param {*} state
  */
 function getQueenMoves (state, selected) {
-  console.log('can queen move?')
   const validMoves = getRookMoves(state, selected).concat(
     getBishopMoves(state, selected)
   )
-  console.log('valid queen moves')
-  console.log(validMoves)
   return validMoves
 }
 /**
@@ -282,7 +261,6 @@ function getQueenMoves (state, selected) {
  * @param {*} state
  */
 function getKingMoves (state, selected) {
-  console.log('can king move?')
   const letter = selected.substring(0, 1)
   const number = Number(selected.substring(1))
   const diagnols = getDiagnols(letter, 1)
@@ -307,8 +285,6 @@ function getKingMoves (state, selected) {
       }
     }
   }
-  console.log('valid king moves')
-  console.log(validMoves)
   return validMoves
 }
 
@@ -341,7 +317,6 @@ function isFriendlyFire (state, space) {
 
 function getDiagnols (letter, d) {
   const index = cols.indexOf(letter)
-  console.log('letter index ' + index + 'd ' + d)
   return {
     right: index - d > -1 ? cols[index - d] : null,
     left: index + d < cols.length ? cols[index + d] : null
