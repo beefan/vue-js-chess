@@ -5,7 +5,7 @@ export function getMoves () {
   return moves.getValidMoves(getPieceType(), store.state, store.state.selected)
 }
 
-export function inCheck (to) {
+export function inCheck () {
   const thisKing = !store.state.turn ? 'king-w' : 'king-b'
   const thisKingLoc = store.state.board.filter(x => x.occupant === thisKing)[0]
     .id

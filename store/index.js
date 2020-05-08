@@ -49,14 +49,15 @@ const store = new Vuex.Store({
       }
     },
     move (state, payload) {
-      console.log('propose move')
       const players = proposeMove(payload.to, state)
-      if (rules.inCheck(payload.to)) {
+      if (rules.inCheck()) {
         alert('moving there will put you in check')
         rollbackMove(state, payload.to, players)
       } else {
-        console.log('commit move')
         commitMove(state)
+        if (putOpponentInCheck(state)) {
+          alert('Check')
+        }
       }
     }
   },
@@ -66,6 +67,12 @@ const store = new Vuex.Store({
     //  this.$store.dispatch('xxx') in child components
   }
 })
+function putOpponentInCheck (state) {
+  state.turn = !state.turn
+  const value = rules.inCheck()
+  state.turn = !state.turn
+  return value
+}
 function proposeMove (to, state) {
   const target = state.board.filter(x => x.id === to)[0].occupant
   const selected = state.board.filter(x => x.id === state.selected)[0].occupant
@@ -78,7 +85,7 @@ function proposeMove (to, state) {
       space.occupant = selected
     }
   }
-  console.log('moving ' + selected + ' to ' + to + ' from ' + state.selected)
+  console.log(selected + ' from ' + state.selected + ' to ' + to)
   state.turn = !state.turn
   return { selected: selected, target: target }
 }
