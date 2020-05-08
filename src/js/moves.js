@@ -204,15 +204,23 @@ function getBishopMoves (state, selected) {
   for (let i = number + 1; i <= 8; i++) {
     const diagnols = getDiagnols(letter, i - number)
     if (left && diagnols.left !== null) {
-      if (isSpaceEmpty(state, diagnols.left + i)) {
-        validMoves.push(diagnols.left + i)
+      const letr = diagnols.left + i
+      if (isSpaceEmpty(state, letr)) {
+        validMoves.push(letr)
+      } else if (!isFriendlyFire(state, letr)) {
+        left = false
+        validMoves.push(letr)
       } else {
         left = false
       }
     }
     if (right && diagnols.right !== null) {
-      if (isSpaceEmpty(state, diagnols.right + i)) {
-        validMoves.push(diagnols.right + i)
+      const letr = diagnols.right + i
+      if (isSpaceEmpty(state, letr)) {
+        validMoves.push(letr)
+      } else if (!isFriendlyFire(state, letr)) {
+        right = false
+        validMoves.push(letr)
       } else {
         right = false
       }
@@ -224,21 +232,23 @@ function getBishopMoves (state, selected) {
   for (let i = number - 1; i > 0; i--) {
     const diagnols = getDiagnols(letter, number - i)
     if (left && diagnols.left !== null) {
-      if (
-        isSpaceEmpty(state, diagnols.left + i) &&
-        !isFriendlyFire(state, diagnols.left + i)
-      ) {
-        validMoves.push(diagnols.left + i)
+      const letr = diagnols.left + i
+      if (isSpaceEmpty(state, letr)) {
+        validMoves.push(letr)
+      } else if (!isFriendlyFire(state, letr)) {
+        left = false
+        validMoves.push(letr)
       } else {
         left = false
       }
     }
     if (right && diagnols.right !== null) {
-      if (
-        isSpaceEmpty(state, diagnols.right + i) &&
-        !isFriendlyFire(state, diagnols.right + i)
-      ) {
-        validMoves.push(diagnols.right + i)
+      const letr = diagnols.right + i
+      if (isSpaceEmpty(state, letr)) {
+        validMoves.push(letr)
+      } else if (!isFriendlyFire(state, letr)) {
+        right = false
+        validMoves.push(letr)
       } else {
         right = false
       }
