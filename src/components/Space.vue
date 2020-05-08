@@ -56,7 +56,6 @@ export default {
   methods: {
     spaceClick (e) {
       if (this.turn === this.pieceColor) {
-        // if this piece is selected, unselected it
         if (this.isSelected) {
           this.$store.commit('select', { piece: null })
         } else {

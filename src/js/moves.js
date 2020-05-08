@@ -6,9 +6,11 @@ const pawnStarts = {
 }
 
 /**
+ * Gets valid moves for selected piece
  *
- * @param {*} piece
- * @param {*} state
+ * @param {String} piece name of piece to move
+ * @param {Object} state vuex state
+ * @param {String} selected id of piece to move
  */
 export function getValidMoves (piece, state, selected) {
   switch (piece) {
@@ -30,8 +32,10 @@ export function getValidMoves (piece, state, selected) {
 }
 
 /**
+ * Get valid pawn moves
  *
- * @param {*} state
+ * @param {Object} state vuex state
+ * @param {String} selected id of pawn to move
  */
 function getPawnMoves (state, selected) {
   const letter = selected.substring(0, 1)
@@ -40,12 +44,10 @@ function getPawnMoves (state, selected) {
   const validMoves = []
   let moves = 1
 
-  // if the pawn is in its original place, it can move two spaces
   if (pawnStarts[getTurnColor(state)].includes(selected)) {
     moves = 2
   }
 
-  // add the next spaces to validMoves if no pieces in the way
   for (let i = 1; i <= moves; i++) {
     if (i === 2 && validMoves.length === 0) {
       break
@@ -70,15 +72,16 @@ function getPawnMoves (state, selected) {
   return validMoves
 }
 /**
+ * Get valid rook moves
  *
- * @param {*} state
+ * @param {*} state vuex state
+ * @param {String} selected id of rook to move
  */
 function getRookMoves (state, selected) {
   const letter = selected.substring(0, 1)
   const number = Number(selected.substring(1))
   const validMoves = []
 
-  // moves up
   for (let i = number + 1; i <= 8; i++) {
     const spaceId = letter + i
     if (isSpaceEmpty(state, spaceId)) {
@@ -90,7 +93,6 @@ function getRookMoves (state, selected) {
       break
     }
   }
-  // moves down
   for (let i = number - 1; i > 0; i--) {
     const spaceId = letter + i
     if (isSpaceEmpty(state, spaceId)) {
@@ -102,7 +104,6 @@ function getRookMoves (state, selected) {
       break
     }
   }
-  // moves right
   for (let i = cols.indexOf(letter) + 1; i < cols.length; i++) {
     const spaceId = cols[i] + number
     if (isSpaceEmpty(state, spaceId)) {
@@ -114,7 +115,6 @@ function getRookMoves (state, selected) {
       break
     }
   }
-  // moves left
   for (let i = cols.indexOf(letter) - 1; i >= 0; i--) {
     const spaceId = cols[i] + number
 
@@ -130,9 +130,11 @@ function getRookMoves (state, selected) {
   return validMoves
 }
 /**
+ * Get valid knight moves
  *
- * @param {*} state
- */
+ * @param {Object} state vuex state
+ * @param {String} selected id of knight to move
+ * **/
 function getKnightMoves (state, selected) {
   const validMoves = []
   const letterIndex = cols.indexOf(selected.substring(0, 1))
@@ -147,42 +149,34 @@ function getKnightMoves (state, selected) {
   const rightTwo = letterIndex + 2 < 8
   const leftTwo = letterIndex - 2 >= 0
 
-  // up two, right one
   let target = cols[letterIndex + 1] + (number + 2)
   if (upTwo && rightOne && !isFriendlyFire(state, target)) {
     validMoves.push(target)
   }
-  // up two, left one
   target = cols[letterIndex - 1] + (number + 2)
   if (upTwo && leftOne && !isFriendlyFire(state, target)) {
     validMoves.push(target)
   }
-  // down two, left one
   target = cols[letterIndex - 1] + (number - 2)
   if (downTwo && leftOne && !isFriendlyFire(state, target)) {
     validMoves.push(target)
   }
-  // down two, right one
   target = cols[letterIndex + 1] + (number - 2)
   if (downTwo && rightOne && !isFriendlyFire(state, target)) {
     validMoves.push(target)
   }
-  // up one, right two
   target = cols[letterIndex + 2] + (number + 1)
   if (upOne && rightTwo && !isFriendlyFire(state, target)) {
     validMoves.push(target)
   }
-  // up one, left two
   target = cols[letterIndex - 2] + (number + 1)
   if (upOne && leftTwo && !isFriendlyFire(state, target)) {
     validMoves.push(target)
   }
-  // down one, right two
   target = cols[letterIndex + 2] + (number - 1)
   if (downOne && rightTwo && !isFriendlyFire(state, target)) {
     validMoves.push(target)
   }
-  // down one, left two
   target = cols[letterIndex - 2] + (number - 1)
   if (downOne && leftTwo && !isFriendlyFire(state, target)) {
     validMoves.push(target)
@@ -190,15 +184,16 @@ function getKnightMoves (state, selected) {
   return validMoves
 }
 /**
+ * Get valid bishop moves
  *
- * @param {*} state
+ * @param {Object} state vuex state
+ * @param {String} selected id of bishop to move
  */
 function getBishopMoves (state, selected) {
   const letter = selected.substring(0, 1)
   const number = Number(selected.substring(1))
   const validMoves = []
 
-  // number increasing to 8
   let left = true
   let right = true
   for (let i = number + 1; i <= 8; i++) {
@@ -226,7 +221,7 @@ function getBishopMoves (state, selected) {
       }
     }
   }
-  // number decreasing to 0
+
   left = true
   right = true
   for (let i = number - 1; i > 0; i--) {
@@ -257,8 +252,10 @@ function getBishopMoves (state, selected) {
   return validMoves
 }
 /**
+ * Get valid queen moves
  *
- * @param {*} state
+ * @param {Object} state vuex state
+ * @param {String} selected id of queen to move
  */
 function getQueenMoves (state, selected) {
   const validMoves = getRookMoves(state, selected).concat(
@@ -267,8 +264,10 @@ function getQueenMoves (state, selected) {
   return validMoves
 }
 /**
+ * Get valid King moves
  *
- * @param {*} state
+ * @param {Object} state vuex state
+ * @param {String} selected id of king to move
  */
 function getKingMoves (state, selected) {
   const letter = selected.substring(0, 1)
@@ -299,9 +298,7 @@ function getKingMoves (state, selected) {
 }
 
 /************************
- * **********************
  * **** Helper funcs. ***
- * **********************
  * **********************
  */
 function isSpaceEmpty (state, space) {
@@ -311,7 +308,6 @@ function isSpaceEmpty (state, space) {
 function getTurnColor (state) {
   return state.turn ? 'white' : 'black'
 }
-
 function getPieceColor (state, space) {
   const piece = state.board.filter(x => x.id === space)[0].occupant
   if (piece === 'empty') {
@@ -320,11 +316,9 @@ function getPieceColor (state, space) {
   const pieceColor = piece.split('-')[1].substring(0, 1)
   return pieceColor === 'w' ? 'white' : 'black'
 }
-
 function isFriendlyFire (state, space) {
   return getTurnColor(state) === getPieceColor(state, space)
 }
-
 function getDiagnols (letter, d) {
   const index = cols.indexOf(letter)
   return {

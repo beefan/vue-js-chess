@@ -1,12 +1,21 @@
 import store from '../../store/index.js'
 const moves = require('./moves.js')
 
+/**
+ * returns valid moves for selected piece
+ */
 export function getMoves () {
   return moves.getValidMoves(getPieceType(), store.state, store.state.selected)
 }
+/**
+ * returns array of spaces containing pieces of color turnColor()
+ */
 export function getPieces () {
   return store.state.board.filter(x => getColor(x) === turnColor())
 }
+/**
+ * returns true if opponent in check
+ */
 export function inCheck () {
   const thisKing = !store.state.turn ? 'king-w' : 'king-b'
   const thisKingLoc = store.state.board.filter(x => x.occupant === thisKing)[0]
@@ -26,6 +35,10 @@ export function inCheck () {
   return isRisk
 }
 
+/*********************
+ * *** HELPER FUNCS **
+ * *******************
+ */
 function type (space) {
   return space.occupant.split('-')[0]
 }

@@ -7,7 +7,6 @@ Vue.use(Vuex)
 const rules = require('../src/js/rules.js')
 const store = new Vuex.Store({
   state: {
-    //  variables here to maintain state of
     board: theBoard,
     turn: true,
     selected: null,
@@ -15,7 +14,6 @@ const store = new Vuex.Store({
     check: false
   },
   getters: {
-    //  vuex supports getter properties for various elements of state
     getBoard: state => {
       return state.board
     },
@@ -33,13 +31,6 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    //  only way to change state in vuex is with mutations
-    //  store.commit('increment') to call this in other components
-    //  can pass another arg such as   increment (state, n) {
-    //  https://vuex.vuejs.org/guide/mutations.html
-    //  increment (state) {
-    //   state.count++
-    // },
     select (state, payload) {
       state.selected = payload.piece
       if (payload.piece !== null) {
@@ -54,7 +45,7 @@ const store = new Vuex.Store({
         alert('moving there will put you in check')
         rollbackMove(state, payload.to, players)
       } else {
-        commitMove(state)
+        commitMove(state, payload.to)
         const status = putOpponentInCheck(state)
         if (status === 'check') {
           alert('Check')
@@ -64,13 +55,65 @@ const store = new Vuex.Store({
         }
       }
     }
-  },
-  actions: {
-    //  like mutations but async allowed
-    //  used for api calls
-    //  this.$store.dispatch('xxx') in child components
   }
 })
+/**
+ * Move piece but return copies
+ * for reverting later if needed
+ *
+ * @param {String} to id of space to move to
+ * @param {Object} state vuex state
+ */
+function proposeMove (to, state) {
+  const target = state.board.filter(x => x.id === to)[0].occupant
+  const selected = state.board.filter(x => x.id === state.selected)[0].occupant
+
+  for (const space of state.board) {
+    if (space.id === state.selected) {
+      space.occupant = 'empty'
+    }
+    if (space.id === to) {
+      space.occupant = selected
+    }
+  }
+  state.turn = !state.turn
+  return { selected: selected, target: target }
+}
+/**
+ * Commit the move, updating state, and writing to log
+ *
+ * @param {Object} state vuex state
+ * @param {String} to id of space to move to
+ */
+function commitMove (state, to) {
+  console.log('MOVE: ' + selected + ' from ' + state.selected + ' to ' + to)
+  state.validMoves = []
+  state.selected = null
+}
+/**
+ * Rollback a move if the move can't be done.
+ *
+ * @param {Object} state vuex state
+ * @param {String} to id of space to rollback
+ * @param {Object} players obj containing copies of space occupants before the move
+ */
+function rollbackMove (state, to, players) {
+  for (const space of state.board) {
+    if (space.id === state.selected) {
+      space.occupant = players.selected
+    }
+    if (space.id === to) {
+      space.occupant = players.target
+    }
+  }
+  state.turn = !state.turn
+}
+/**
+ * Returns true if the opponent is in check
+ * false if not
+ *
+ * @param {Object} state vuex state
+ */
 function putOpponentInCheck (state) {
   let status = ''
   state.turn = !state.turn
@@ -81,14 +124,16 @@ function putOpponentInCheck (state) {
   }
   return status
 }
+/**
+ * Returns true if the opponent is in checkmate
+ * false if not
+ *
+ * @param {Object} state vuex state
+ */
 function isCheckMate (state) {
-  console.log('checking to see if ' + state.turn + ' is in checkmate ')
-
   const pieces = rules.getPieces()
-
   let canMove = false
   for (const piece of pieces) {
-    // select the piece
     store.commit('select', { piece: piece.id })
     for (const move of state.validMoves) {
       const players = proposeMove(move, state)
@@ -104,61 +149,10 @@ function isCheckMate (state) {
       break
     }
   }
-  commitMove(state)
-  return !canMove
-}
-function proposeMove (to, state) {
-  const target = state.board.filter(x => x.id === to)[0].occupant
-  const selected = state.board.filter(x => x.id === state.selected)[0].occupant
 
-  for (const space of state.board) {
-    if (space.id === state.selected) {
-      space.occupant = 'empty'
-    }
-    if (space.id === to) {
-      space.occupant = selected
-    }
-  }
-  console.log(selected + ' from ' + state.selected + ' to ' + to)
-  state.turn = !state.turn
-  return { selected: selected, target: target }
-}
-function commitMove (state) {
   state.validMoves = []
   state.selected = null
+  return !canMove
 }
-function rollbackMove (state, to, players) {
-  for (const space of state.board) {
-    if (space.id === state.selected) {
-      space.occupant = players.selected
-    }
-    if (space.id === to) {
-      space.occupant = players.target
-    }
-  }
-  state.turn = !state.turn
-}
-// function movePiece (to, state) {
-//   let piece
-//   if (!state.selected) {
-//     return
-//   }
-//   for (const space of state.board) {
-//     if (space.id === state.selected) {
-//       piece = space.occupant
-//       space.occupant = 'empty'
-//       break
-//     }
-//   }
-//   for (const space of state.board) {
-//     if (space.id === to) {
-//       space.occupant = piece
-//       break
-//     }
-//   }
-
-//   state.turn = !state.turn
-//   state.selected = null
-// }
 
 export default store

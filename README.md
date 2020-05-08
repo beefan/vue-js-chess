@@ -1,6 +1,15 @@
 # vue-js-chess
 
-Simple Chess Game implemented in Vue to help me learn it! 
+Simple Chess Game implemented in Vue. Features include: 
+* vuex store to hold state of game
+* valid moves calculated on piece select and highlighted on board
+* 2 player game play
+* pieces move according to chess rules
+* program prevents you from putting yourself in check
+* program notifies upon checkmate
+
+Known limitations: 
+* Pawn promotion not implemented
 
 ## screen shot
 ![vue chess](./vue-chess-screen.png)
