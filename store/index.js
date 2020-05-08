@@ -55,8 +55,12 @@ const store = new Vuex.Store({
         rollbackMove(state, payload.to, players)
       } else {
         commitMove(state)
-        if (putOpponentInCheck(state)) {
+        const status = putOpponentInCheck(state)
+        if (status === 'check') {
           alert('Check')
+        } else if (status === 'checkmate') {
+          const winner = state.turn ? 'black!' : 'white!'
+          alert('Checkmate. The winner is ' + winner)
         }
       }
     }
@@ -68,10 +72,40 @@ const store = new Vuex.Store({
   }
 })
 function putOpponentInCheck (state) {
+  let status = ''
   state.turn = !state.turn
   const value = rules.inCheck()
   state.turn = !state.turn
-  return value
+  if (value) {
+    status = isCheckMate(state) ? 'checkmate' : 'check'
+  }
+  return status
+}
+function isCheckMate (state) {
+  console.log('checking to see if ' + state.turn + ' is in checkmate ')
+
+  const pieces = rules.getPieces()
+
+  let canMove = false
+  for (const piece of pieces) {
+    // select the piece
+    store.commit('select', { piece: piece.id })
+    for (const move of state.validMoves) {
+      const players = proposeMove(move, state)
+      if (!rules.inCheck()) {
+        canMove = true
+      }
+      rollbackMove(state, move, players)
+      if (canMove) {
+        break
+      }
+    }
+    if (canMove) {
+      break
+    }
+  }
+  commitMove(state)
+  return !canMove
 }
 function proposeMove (to, state) {
   const target = state.board.filter(x => x.id === to)[0].occupant

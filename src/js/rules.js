@@ -4,7 +4,9 @@ const moves = require('./moves.js')
 export function getMoves () {
   return moves.getValidMoves(getPieceType(), store.state, store.state.selected)
 }
-
+export function getPieces () {
+  return store.state.board.filter(x => getColor(x) === turnColor())
+}
 export function inCheck () {
   const thisKing = !store.state.turn ? 'king-w' : 'king-b'
   const thisKingLoc = store.state.board.filter(x => x.occupant === thisKing)[0]
@@ -22,14 +24,6 @@ export function inCheck () {
     }
   }
   return isRisk
-}
-
-export function opponentInCheck () {
-  if (Math.random() < 0.5) {
-    return true
-  }
-
-  return false
 }
 
 function type (space) {
