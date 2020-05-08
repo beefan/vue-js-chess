@@ -45,6 +45,7 @@ const store = new Vuex.Store({
         alert('moving there will put you in check')
         rollbackMove(state, payload.to, players)
       } else {
+        logMove(players.selected, state.selected, payload.to)
         commitMove(state, payload.to)
         const status = putOpponentInCheck(state)
         if (status === 'check') {
@@ -85,8 +86,7 @@ function proposeMove (to, state) {
  * @param {Object} state vuex state
  * @param {String} to id of space to move to
  */
-function commitMove (state, to) {
-  console.log('MOVE: ' + selected + ' from ' + state.selected + ' to ' + to)
+function commitMove (state) {
   state.validMoves = []
   state.selected = null
 }
@@ -150,9 +150,18 @@ function isCheckMate (state) {
     }
   }
 
-  state.validMoves = []
-  state.selected = null
+  commitMove(state)
   return !canMove
+}
+/**
+ * Write the move to the console to keep a log of all moves
+ *
+ * @param {String} selected piece selected to move
+ * @param {String} from id from which to move
+ * @param {String} to id to which to move
+ */
+function logMove (selected, from, to) {
+  console.log('MOVE: ' + selected + ' from ' + from + ' to ' + to)
 }
 
 export default store
