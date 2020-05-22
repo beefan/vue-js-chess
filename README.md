@@ -1,4 +1,4 @@
-# vue-js-chess
+# vue-js-chess [![Netlify Status](https://api.netlify.com/api/v1/badges/252640d1-3273-45e4-aa7c-32fd8de6c66d/deploy-status)](https://app.netlify.com/sites/vue-js-chess/deploys)
 
 Simple Chess Game implemented in Vue. Features include: 
 * vuex store to hold state of game
